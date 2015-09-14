@@ -12,12 +12,22 @@
         });
 
         mapData.places.forEach(function (place) {
-            place.exits.forEach(function (exit) {
-                map.places[place.title].addExit(exit.direction, map.places[exit.title]);
-            });
+
+            if (place.exits) {
+                place.exits.forEach(function (exit) {
+                    map.places[place.title].addExit(exit.direction, map.places[exit.title]);
+                });
+            }
+
+            if (place.items) {
+                place.items.forEach(function (item) {
+                    map.places[place.title].addItem(item);
+                });
+            }
+
         });
 
-        map.currentPlace = mapData.start;
+        map.currentPlace = map.places[mapData.start];
 
         return map;
     };
@@ -27,6 +37,10 @@
 
         this.where = function () {
             this.map.currentPlace.showInfo();
+        };
+
+        this.go = function (direction) {
+            this.map.currentPlace = this.map.currentPlace.exits[direction];
         };
     };
 

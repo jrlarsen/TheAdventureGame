@@ -1,0 +1,29 @@
+TAG.house = {
+  "title" : "The House",
+  "places" : [
+    {
+      "title" : "The Hallway",
+      "description" : "You are in a large hallway",
+      "exits" : [
+        {
+          "direction" : "east",
+          "title" : "The Old Library"
+        }
+      ]
+    },
+    {
+      "title" : "The Old Library",
+      "description" : "You are in an old library. Dusty books line the walls",
+      "exits" : [
+        {
+          "direction" : "west",
+          "title" : "The Hallway"
+        }
+      ],
+      "items" : [
+        "a rusty key"
+      ]
+    }
+  ],
+  "start" : "The Hallway"
+}
