@@ -11,30 +11,16 @@
             this.items.push(item);
         };
 
+        this.removeItem = function (item) {
+            var itemIndex = this.items.indexOf(item);
+
+            if (itemIndex !== -1) {
+                this.items.splice(itemIndex, 1);
+            }
+        };
+
         this.addExit = function (direction, exit) {
             this.exits[direction] = exit;
-        };
-
-        this.showItems = function () {
-            console.log("Items:");
-            this.items.forEach(function (item, i) {
-                console.log("(" + i + ") " + item);
-            });
-        };
-
-        this.showExits = function () {
-            console.log("Exits from " + this.title + ":");
-
-            Object.keys(this.exits).forEach(function (key) {
-                console.log(key);
-            });
-        };
-
-        this.showInfo = function () {
-            console.log(this.title);
-            console.log(this.description);
-            this.showItems();
-            this.showExits();
         };
     };
 
