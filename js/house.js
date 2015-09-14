@@ -25,5 +25,5 @@ TAG.house = {
       ]
     }
   ],
-  "start" : "The Hallway"
+  "start" : "The Old Library"
 }

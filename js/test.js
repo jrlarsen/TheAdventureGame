@@ -1,3 +1,3 @@
 var map = new TAG.Map(TAG.house);
 
-map.where();
+TAG.Views.place.showInfo(map.map.currentPlace);

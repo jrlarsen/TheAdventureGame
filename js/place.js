@@ -6,6 +6,7 @@
         this.description = description;
         this.exits = {};
         this.items = [];
+        this.visited = false;
 
         this.addItem = function (item) {
             this.items.push(item);

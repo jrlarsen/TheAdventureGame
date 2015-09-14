@@ -35,10 +35,6 @@
     var Map = function (mapData) {
         this.map = generateMap(mapData);
 
-        this.where = function () {
-            this.map.currentPlace.showInfo();
-        };
-
         this.go = function (direction) {
             this.map.currentPlace = this.map.currentPlace.exits[direction];
         };
