@@ -11,27 +11,13 @@
             this.items.push(item);
         };
 
-        this.showItems = function () {
-            console.log("Items:");
-            this.items.forEach(function (item, i) {
-                console.log("(" + i + ") " + item);
-            });
-        };
+        this.removeItem = function (item) {
+            var itemIndex = this.items.indexOf(item);
 
-        this.showPlace = function () {
-            console.log(this.name + " is in " + this.place.title);
-        };
-
-        this.showHealth = function () {
-            console.log(this.name + " has health " + this.health);
-        };
-
-        this.showInfo = function () {
-            console.log(this.name + ":");
-            this.showPlace();
-            this.showHealth();
-            this.showItems();
-        };
+            if (itemIndex !== -1) {
+                this.items.splice(itemIndex, 1);
+            }
+        }
     };
 
     TAG.Player = Player;

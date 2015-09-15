@@ -15,7 +15,7 @@
 
             if (place.exits) {
                 place.exits.forEach(function (exit) {
-                    map.places[place.title].addExit(exit.direction, map.places[exit.title]);
+                    map.places[place.title].addExit(exit.direction, map.places[exit.title], exit.challenge);
                 });
             }
 
@@ -27,16 +27,34 @@
 
         });
 
-        map.currentPlace = map.places[mapData.start];
+        map.start = map.places[mapData.start];
 
         return map;
     };
 
     var Map = function (mapData) {
-        this.map = generateMap(mapData);
+        var map = generateMap(mapData),
+            currentPlace = map.start;
+
+        currentPlace.visited = true;
+
+        this.hasExit = function (direction) {
+            return currentPlace.getExit(direction);
+        };
 
         this.go = function (direction) {
-            this.map.currentPlace = this.map.currentPlace.exits[direction];
+            var exit = currentPlace.getExit(direction);
+
+            if (exit) {
+                currentPlace = exit.destination;
+                currentPlace.visited = true;
+            }
+
+            return currentPlace;
+        };
+
+        this.getPlace = function () {
+            return currentPlace;
         };
     };
 

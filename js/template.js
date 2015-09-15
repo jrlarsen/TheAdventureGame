@@ -1,5 +1,5 @@
 (function () {
-    "use strict"
+    "use strict";
 
     var Template = function (templateString) {
         this.templateString = templateString;

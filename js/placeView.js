@@ -5,22 +5,22 @@
     TAG.Views.place = {
 
         showExits: function (place) {
-            var template;
-
-            if (place.visited) {
-                template = new TAG.Template("({{i}}) {{direction}} to {{title}}");
-            } else {
-                template = new TAG.Template("({{i}}) {{direction}}");
-            }
+            var visitedTemplate = new TAG.Template("({{i}}) {{direction}} to {{title}}"),
+                unvisitedTemplate = new TAG.Template("({{i}}) {{direction}}");
 
             if (Object.keys(place.exits).length) {
                 console.log("Exits:");
 
                 Object.keys(place.exits).forEach(function (key, i) {
+                    var destination = place.exits[key].destination,
+                        template;
+
+                    template = destination.visited ? visitedTemplate : unvisitedTemplate;
+
                     console.log(template.fill({
-                        i : i,
+                        i : i + 1,
                         direction : key,
-                        title : place.exits[key].title
+                        title : destination.title
                     }));
                 });
             }
@@ -34,7 +34,7 @@
 
                 place.items.forEach(function (item, i) {
                     console.log(template.fill({
-                        i : i,
+                        i : i + 1,
                         item : item
                     }));
                 });
@@ -42,10 +42,12 @@
         },
 
         showInfo: function (place) {
-            console.log(place.title);
+            console.log("");
+            console.log("=== " + place.title + " ===");
             console.log(place.description);
             this.showItems(place);
             this.showExits(place);
+            console.log("");
         }
 
     };

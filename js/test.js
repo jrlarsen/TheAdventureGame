@@ -1,3 +1,7 @@
-var map = new TAG.Map(TAG.house);
+var game = new TAG.Game(TAG.house, new TAG.Player("Dax", 50));
 
-TAG.Views.place.showInfo(map.map.currentPlace);
+game.addView("info", TAG.Views.info);
+game.addView("player", TAG.Views.player);
+game.addView("place", TAG.Views.place);
+
+game.start();
