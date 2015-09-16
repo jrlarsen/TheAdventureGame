@@ -24,13 +24,30 @@ function doAction() {
         case "use":
             if (bits.length > 1) {
                 item = bits.splice(0, bits.length - 1).join(" ");
-                game.use(item, bits[0]);
+                if (game.checkExit(bits[0])) {
+                    game.use(item, bits[0]);
+                } else {
+                    game.log("There is nothing in that direction.");
+                }
             } else {
                 game.log("I need to know the item and the exit.\ne.g. 'use a rusty key north' or 'use 3 1'");
             }
             break;
         case "get":
-            game.get(bits[0]);
+            game.get(bits.join(" "));
+            break;
+        case "help":
+            game.log([
+                '\n',
+                'me                --> player info',
+                'here              --> place info',
+                'go {exit}         --> go to the place specified as text or index',
+                '                      e.g. "go west" or "go 1"',
+                'get {item}        --> get item specified as text or index',
+                '                      e.g. "get a lamp" or "get 1"',
+                'use {item} {exit} --> use the item in the direction specified',
+                '                      e.g. "use a rusty key north" or "use 3 2" '
+            ].join('\n'));
             break;
         default:
             game.log("I don't know how to do that!");

@@ -73,21 +73,21 @@
             }
         };
 
-        this.get = function (itemIndex) {
+        this.get = function (itemIndexOrName) {
             var place = map.getPlace(),
-                item = place.items[itemIndex - 1];
+                item = place.getItem(itemIndexOrName);
 
             if (item) {
                 player.addItem(item);
                 place.removeItem(item);
-                game.me(player);
+                game.here();
             } else {
                 game.log("There is no such item here");
             }
         };
 
-        this.use = function (itemIndex, direction) {
-            var item = player.items[itemIndex - 1],
+        this.use = function (itemIndexOrName, direction) {
+            var item = player.getItem(itemIndexOrName),
                 exit = map.getPlace().getExit(direction);
 
             if (item) {
@@ -106,6 +106,10 @@
             } else {
                 game.log("You don't have that item");
             }
+        };
+
+        this.checkExit = function (direction) {
+            return map.hasExit(direction);
         };
 
         this.setGlobal = function (global) {

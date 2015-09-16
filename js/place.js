@@ -55,6 +55,22 @@
             
             return exit;
         };
+
+        this.getItem = function (indexOrName) {
+            var itemIndex = parseInt(indexOrName) - 1,
+                items = this.items,
+                item = null;
+
+            if (isNaN(itemIndex)) {
+                itemIndex = items.indexOf(indexOrName);
+            }
+
+            if (itemIndex > -1 && itemIndex < items.length) {
+                item = items[itemIndex];
+            }
+
+            return item;
+        };
     };
 
     TAG.Place = Place;
