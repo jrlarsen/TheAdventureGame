@@ -4,8 +4,6 @@ game.addView("info", TAG.Views.info);
 game.addView("player", TAG.Views.player);
 game.addView("place", TAG.Views.place);
 
-game.start();
-
 var txtInput = document.getElementById("gameInput");
 
 function doAction() {
@@ -71,4 +69,8 @@ txtInput.addEventListener("keypress", function (event) {
     }
 });
 
-txtInput.focus();
+window.onload = function () {
+    game.start();
+    txtInput.value = "help";
+    doAction();
+};
