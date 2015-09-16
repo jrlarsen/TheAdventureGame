@@ -4,8 +4,14 @@
     TAG.Views = TAG.Views || {};
     TAG.Views.info = {
 
-        log: function (message) {
-            console.log("*** " + message + " ***");
+        log: function (message, log) {
+            message = "*** " + message + " ***";
+
+            if (log) {
+                log(message);
+            }
+
+            return message;
         }
 
     };

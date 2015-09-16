@@ -4,12 +4,13 @@
     TAG.Views = TAG.Views || {};
     TAG.Views.place = {
 
-        showExits: function (place) {
+        showExits: function (place, log) {
             var visitedTemplate = new TAG.Template("({{i}}) {{direction}} to {{title}}"),
-                unvisitedTemplate = new TAG.Template("({{i}}) {{direction}}");
+                unvisitedTemplate = new TAG.Template("({{i}}) {{direction}}"),
+                output = [];
 
             if (Object.keys(place.exits).length) {
-                console.log("Exits:");
+                output.push("Exits:");
 
                 Object.keys(place.exits).forEach(function (key, i) {
                     var destination = place.exits[key].destination,
@@ -17,37 +18,61 @@
 
                     template = destination.visited ? visitedTemplate : unvisitedTemplate;
 
-                    console.log(template.fill({
+                    output.push(template.fill({
                         i : i + 1,
                         direction : key,
                         title : destination.title
                     }));
                 });
             }
+
+            if (log) {
+                log(output.join('\n'));
+            }
+
+            return output;
         },
 
-        showItems: function (place) {
-            var template = new TAG.Template("({{i}}) {{item}}");
+        showItems: function (place, log) {
+            var template = new TAG.Template("({{i}}) {{item}}"),
+                output = [];
 
             if (place.items.length) {
-                console.log("Items:");
+                output.push("Items:");
 
                 place.items.forEach(function (item, i) {
-                    console.log(template.fill({
+                    output.push(template.fill({
                         i : i + 1,
                         item : item
                     }));
                 });
             }
+
+            if (log) {
+                log(output.join('\n'));
+            }
+
+            return output;
         },
 
-        showInfo: function (place) {
-            console.log("");
-            console.log("=== " + place.title + " ===");
-            console.log(place.description);
-            this.showItems(place);
-            this.showExits(place);
-            console.log("");
+        showInfo: function (place, log) {
+            var output = [];
+
+            output.push("");
+            output.push("=== " + place.title + " ===");
+            output.push("");
+            output.push(place.description);
+            output.push("");
+            output.push(this.showItems(place).join('\n'));
+            output.push("");
+            output.push(this.showExits(place).join('\n'));
+            output.push("");
+
+            if (log) {
+                log(output.join('\n'));
+            }
+
+            return output;
         }
 
     };

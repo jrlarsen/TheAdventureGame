@@ -3,8 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
+
+    <style>
+        html {
+            background:black;
+            color:green;
+            font-family:monospace;
+            padding:40px;
+        }
+
+        div {
+            background:black;
+            color:green;
+            font-family:monospace;
+            font-size:100%;
+            width:100%;
+            min-height:24em;
+            border:none;
+            white-space: pre-wrap;
+            margin-bottom:2em;
+        }
+
+        #gameInput {
+            background:black;
+            color:green;
+            font-family:monospace;
+            font-size:100%;
+            border:none;
+            padding:3px 5px;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
+
+<h1>The Adventure Game</h1>
+
+<div id="gameOutput"></div>
+
+&gt; <input type="text" id="gameInput" />
 
 <script src="../js/tag.js"></script>
 <script src="../js/place.js"></script>

@@ -4,39 +4,53 @@
     TAG.Views = TAG.Views || {};
     TAG.Views.player = {
 
-        showPlace: function (player) {
-            if (player.place) {
-                TAG.Views.place.showInfo(player.place);
-            }
-        },
-
-        showItems: function (player) {
-            var template = new TAG.Template("({{i}}) {{item}}");
+        showItems: function (player, log) {
+            var template = new TAG.Template("({{i}}) {{item}}"),
+                output = [];
 
             if (player.items.length) {
-                console.log("Items:");
+                output.push("Items:");
 
                 player.items.forEach(function (item, i) {
-                    console.log(template.fill({
+                    output.push(template.fill({
                         i : i + 1,
                         item : item
                     }));
                 });
+
+                if (log) {
+                    log(output.join('\n'));
+                }
             }
+
+            return output;
         },
 
-        showHealth: function (player) {
-            var template = new TAG.Template("{{name}} has health {{health}}");
+        showHealth: function (player, log) {
+            var template = new TAG.Template("{{name}} has health {{health}}"),
+                output = template.fill(player);
 
-            console.log(template.fill(player));
+            if (log) {
+                log(output);
+            }
+
+            return output;
         },
 
-        showInfo: function (player) {
-            console.log("");
-            console.log("--- Player Info for " + player.name + " ---");
-            this.showHealth(player);
-            this.showItems(player);
-            console.log("");
+        showInfo: function (player, log) {
+            var output = [];
+
+            output.push("");
+            output.push("--- Player Info for " + player.name + " ---");
+            output.push(this.showHealth(player));
+            output.push(this.showItems(player).join('\n'));
+            output.push("");
+
+            if (log) {
+                log(output.join('\n'));
+            }
+
+            return output;
         }
 
     };

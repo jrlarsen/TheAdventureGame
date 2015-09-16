@@ -17,7 +17,7 @@
             if (itemIndex !== -1) {
                 this.items.splice(itemIndex, 1);
             }
-        }
+        };
     };
 
     TAG.Player = Player;

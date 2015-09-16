@@ -29,7 +29,7 @@ TAG.house = {
     },
     {
       "title" : "The Old Library",
-      "description" : "You are in an old library. Dusty books line the walls. There is a gaping hole in the ceiling.",
+      "description" : "You are in an old library. Dusty books line the walls.\nThere is a gaping hole in the ceiling.",
       "exits" : [
         {
           "direction" : "west",

@@ -12,7 +12,7 @@
                 do {
                     result = currentString;
                     currentString = currentString.replace("{{" + key + "}}", data[key]);
-                } while (currentString !== result)
+                } while (currentString !== result);
             });
 
             return result;

@@ -19,19 +19,28 @@
 
         this.me = function () {
             views.player.forEach(function (view) {
-                view.showInfo(player);
+                view.showInfo(player, function (message) {
+                    var output = document.getElementById("gameOutput");
+                    output.innerText = message;
+                });
             });
         };
 
         this.here = function () {
             views.place.forEach(function (view) {
-                view.showInfo(map.getPlace());
+                view.showInfo(map.getPlace(), function (message) {
+                    var output = document.getElementById("gameOutput");
+                    output.innerText = message;
+                });
             });
         };
 
         this.log = function (message) {
             views.info.forEach(function (view) {
-                view.log(message);
+                view.log(message, function (message) {
+                    var output = document.getElementById("gameOutput");
+                    output.innerText = output.innerText + '\n\n' + message;
+                });
             });
         };
 
