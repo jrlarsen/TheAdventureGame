@@ -68,7 +68,8 @@ TAG.house = {
             "message" : "The cupboard is locked.",
             "success" : "With a wince-inducing squeal, the key turns in the lock.",
             "failure" : "That doesn't work. The cupboard refuses to open.",
-            "requires" : "a rusty key"
+            "requires" : "a rusty key",
+            "itemConsumed" : true
           }
         }
       ]
@@ -99,9 +100,10 @@ TAG.house = {
           "title" : "The Trapdoor",
           "challenge" : {
             "message" : "It is too dark to go in that direction. You might trip and graze your knee.",
-            "success" : "The warm glow of the lamp lights the way.",
+            "success" : "The lamp splutters into life. It won't last long.\nLuckily there are some brands in sconces.\nYou light the brands before the lamp gutters and fails.",
             "failure" : "I'm not sure how that will help. It's still too dark.",
             "requires" : "a lamp",
+            "itemConsumed" : true,
             "damage" : 1
           }
         }
@@ -129,7 +131,7 @@ TAG.house = {
     },
     {
       "title" : "The Dungeon",
-      "description" : "You are in a dungeon. It is dark and dank and dreary.\nYou're lamp shows the dungeon extends to the south.",
+      "description" : "You are in a dungeon. It is dark and dank and dreary.",
       "exits" : [
         {
           "direction" : "up",
@@ -143,6 +145,7 @@ TAG.house = {
             "success" : "'At last! A sword worthy of my station and purpose. You are blessed indeed!'\nAccepting your gift, the knight is really, really happy and steps out of the way.",
             "failure" : "'You are not worthy,' says the knight, tickling you painfully with his feather duster.\nHe still blocks the path. 'NUN SHALL PASS!!!",
             "requires" : "The Sword of the Sisters of the Sword",
+            "itemConsumed" : true,
             "damage" : 7
           }
         },
@@ -200,12 +203,13 @@ TAG.house = {
         },
         {
           "direction" : "north",
-          "title" : "Congratulations! You are free",
+          "title" : "Outside",
           "challenge" : {
             "message" : "The zombie groans mournfully and sinks its teeth into your neck. It really hurts!!!",
             "success" : "With a whistful sigh,\n\n't h a n k   y   o    u,'\n\nthe zombie disintegrates into an icky puddle of putrid goo.",
             "failure" : "The zombie is strangely resilient. Maybe it's something to do with the diabolical curse. Poor zombie.",
             "requires" : "holy water",
+            "itemConsumed" : true,
             "damage" : 20
           }
         }
@@ -216,7 +220,7 @@ TAG.house = {
     },
     {
       "title" : "The Walled Garden",
-      "description" : "You are in a beautiful, fragrant walled garden, filled with colour... and a dog... and a shed.",
+      "description" : "You are in a beautiful, fragrant walled garden, filled with colour\n... and a dog\n... and a shed.",
       "exits" : [
         {
           "direction" : "east",
@@ -249,8 +253,43 @@ TAG.house = {
       ]
     },
     {
-      "title" : "Congratulations! You are free",
-      "description" : "You exit the house into bright sunshine. A road of yellow bricks winds into the countryside.\nDid that scarecrow just wink at you?"
+      "title" : "Outside",
+      "description" : "You exit the house into bright sunshine.\n" +
+      "A road of yellow bricks winds into the countryside to the north.\n" +
+      "It looks like it might be a really long way to the next village.\n\n" +
+      "Did that scarecrow just wink at you?",
+      exits : [
+        {
+          "direction" : "north",
+          "title" : "The Road"
+        }
+      ]
+    },
+    {
+      "title" : "The Road",
+      "description" : "The road winds lazily through the countryside.\nYou breath in the fresh air as you walk...and walk...and walk...\n\n" +
+          "...until the house seems like a distant memory.",
+      "exits" : [
+        {
+          "direction" : "north",
+          "title" : "The Village",
+          "challenge" : {
+            "message" : "It's a really long way. I hope you're healthy.",
+            "success" : "At last, The Village is in sight to the north!",
+            "failure" : "The countryside is quite pretty in a repetitive kind of way.\nBut, with no village in sight, you're not sure you'll make it.\n\n" +
+              "You may need something to boost your health.",
+            "test" : {
+              "health" : 50
+            },
+            "damage" : 10
+          }
+        }
+      ]
+    },
+    {
+      "title" : "The Village",
+      "description" : "You stagger into a beautiful village of smiling country folk.\nThey welcome you and give you shelter.\n\n\n" +
+        "Your adventure is complete!"
     },
     {
       "title" : "The Landing",

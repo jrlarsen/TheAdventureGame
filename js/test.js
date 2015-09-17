@@ -8,7 +8,7 @@ var txtInput = document.getElementById("gameInput");
 
 function doAction() {
     var bits = txtInput.value.split(" "),
-        action = bits.splice(0, 1)[0],
+        action = bits.splice(0, 1)[0].toLowerCase(),
         item;
 
     switch (action) {
@@ -34,17 +34,22 @@ function doAction() {
         case "get":
             game.get(bits.join(" "));
             break;
+        case "drink":
+            game.drink(bits.join(" "));
+            break;
         case "help":
             game.log([
                 '\n',
-                'me                --> player info',
-                'here              --> place info',
-                'go {exit}         --> go to the place specified as text or index',
-                '                      e.g. "go west" or "go 1"',
-                'get {item}        --> get item specified as text or index',
-                '                      e.g. "get a lamp" or "get 1"',
-                'use {item} {exit} --> use the item in the direction specified',
-                '                      e.g. "use a rusty key north" or "use 3 2" '
+                'me                -->  player info',
+                'here              -->  place info',
+                'go {exit}         -->  go to the place specified as text or index',
+                '                       e.g. "go west" or "go 1"',
+                'get {item}        -->  get item specified as text or index',
+                '                       e.g. "get a lamp" or "get 1"',
+                'use {item} {exit} -->  use the item in the direction specified',
+                '                       e.g. "use a rusty key north" or "use 3 2" ',
+                'drink {item}      -->  drink the specified item',
+                'help              -->  show this help info'
             ].join('\n'));
             break;
         default:
@@ -58,14 +63,18 @@ function doAction() {
 txtInput.addEventListener("keypress", function (event) {
     var key;
 
-    if (typeof event.charCode === "number") {
+    if (typeof event.charCode === "number" && event.charCode !== 0) {
         key = event.charCode;
     } else {
         key = event.keyCode;
     }
 
     if (key === 13) {
-        doAction();
+        if (game.inPlay) {
+            doAction();
+        } else {
+            game.log("The game is over. Refresh the page to play again.");
+        }
     }
 });
 
